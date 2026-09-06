@@ -1,0 +1,36 @@
+@use "./button.scss";
+
+:root {
+  // Button/UI accent — original orange, untouched
+  --accent: #dd4200;
+  --accent-hover: #ff8555;
+  --accent-glow: rgba(221, 66, 0, 0.4);
+
+  // Page background — baby pink mood
+  --bg-primary: #120a10;
+  --bg-glow-pink: rgba(255, 176, 203, 0.18);
+  --bg-glow-deep: rgba(120, 60, 90, 0.35);
+
+  --text-primary: #ffffff;
+  --text-secondary: #b09aa5;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(ellipse 900px 700px at 25% 15%, var(--bg-glow-pink), transparent 60%),
+    radial-gradient(ellipse 800px 600px at 80% 90%, var(--bg-glow-deep), transparent 65%);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

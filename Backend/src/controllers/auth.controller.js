@@ -2,6 +2,7 @@ const userModel = require("../models/user.model");
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
 const blacklistModel = require("../models/blacklist.model");
+const redis = require("../config/cache")
 
 
 async function  registerUser(req, res) {
@@ -111,15 +112,17 @@ async function getMe(req, res) {
 }
 
 
-async function loggoutUser(req, res) {
+async function logoutUser(req, res) {
     
     const token = req.cookies.token
 
     res.clearCookie("token")
 
-    await blacklistModel.create({
-        token
-    })
+    await redis.set(token, Date.now().toString(), "EX", 60 * 60)   // ab redis me token ko blacklist kree rhe hain 
+
+    // await blacklistModel.create({    //aise phle likha tha create krna blacklist me token ko
+    //     token
+    // })                             // abhi token ko ham blacklist kr rhe the mongo db me 
 
     res.status(200).json({
         message: "logout successfully"
@@ -127,4 +130,4 @@ async function loggoutUser(req, res) {
 }
 
 
-module.exports = {registerUser, loginUser, getMe, loggoutUser}
+module.exports = {registerUser, loginUser, getMe, logoutUser}

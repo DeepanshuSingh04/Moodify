@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { detect, init } from "../utils/utils";
+import { detect, init } from "../utils/util.js";
 
 
 export default function FaceExpression({ onClick = () => { } }) {
