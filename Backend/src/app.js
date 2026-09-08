@@ -8,6 +8,7 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
+
 app.use(
   cors({
     origin: true,
@@ -27,12 +28,13 @@ app.use("/api/songs", songRoutes);
 /**
  * Static Frontend Files Serve
  */
-// Static folder path (dist folder ka path check kar lein)
 app.use(express.static(path.join(__dirname, "../dist")));
 
-// Express 5 wildcard syntax: '/*' ya '/(.*)'
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../dist", "index.html"));
+// React frontend fallback
+app.get("/{*splat}", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "../dist", "index.html")
+  );
 });
 
 module.exports = app;
