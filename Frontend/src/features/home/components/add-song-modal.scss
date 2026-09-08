@@ -1,0 +1,525 @@
+.add-song-backdrop {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 200;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    animation:
+        add-song-fade-in 0.2s ease;
+}
+
+// ======================================
+// CARD
+// ======================================
+
+.add-song-card {
+    width: 100%;
+
+    max-width: 480px;
+
+    background: rgba(22, 14, 24, 0.96);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.6);
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    animation:
+        add-song-slide-up
+        0.25s
+        cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+// ======================================
+// HEADER
+// ======================================
+
+.add-song-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    padding: 24px 24px 16px;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    &-title {
+
+        h2 {
+            margin: 0;
+
+            font-size: 1.25rem;
+
+            font-weight: 700;
+
+            color: #ffffff;
+        }
+
+        .add-song-subtitle {
+            font-size: 0.8rem;
+
+            color:
+                var(
+                    --text-secondary,
+                    #b09aa5
+                );
+        }
+    }
+}
+
+// ======================================
+// CLOSE
+// ======================================
+
+.add-song-close-btn {
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    border: none;
+
+    color: #a0a0a0;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: all 0.15s ease;
+
+    &:hover {
+        background:
+            rgba(255, 255, 255, 0.12);
+
+        color: #ffffff;
+    }
+}
+
+// ======================================
+// FORM
+// ======================================
+
+.add-song-form {
+    padding: 24px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+// ======================================
+// ALERTS
+// ======================================
+
+.add-song-alert {
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    font-size: 0.82rem;
+
+    font-weight: 500;
+
+    &--error {
+        background:
+            rgba(229, 72, 77, 0.15);
+
+        border:
+            1px solid
+            rgba(229, 72, 77, 0.35);
+
+        color: #ff6b6b;
+    }
+
+    &--success {
+        background:
+            rgba(63, 191, 143, 0.15);
+
+        border:
+            1px solid
+            rgba(63, 191, 143, 0.35);
+
+        color: #4ade80;
+    }
+}
+
+// ======================================
+// FORM FIELD
+// ======================================
+
+.add-song-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    label {
+        font-size: 0.8rem;
+
+        font-weight: 600;
+
+        color: #cccccc;
+    }
+
+    input[type='text'],
+    input[type='url'] {
+
+        width: 100%;
+
+        box-sizing: border-box;
+
+        background:
+            rgba(255, 255, 255, 0.05);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.1);
+
+        border-radius: 10px;
+
+        padding: 10px 14px;
+
+        color: #ffffff;
+
+        font-size: 0.88rem;
+
+        outline: none;
+
+        transition:
+            border-color 0.15s ease,
+            background 0.15s ease;
+
+        &:focus {
+            border-color:
+                var(
+                    --accent-hover,
+                    #ff8555
+                );
+
+            background:
+                rgba(255, 255, 255, 0.08);
+        }
+
+        &::placeholder {
+            color: #666666;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+        }
+    }
+
+    // ==================================
+    // FILE
+    // ==================================
+
+    .add-song-file-input {
+        background:
+            rgba(255, 255, 255, 0.05);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.1);
+
+        border-radius: 10px;
+
+        padding: 8px 12px;
+
+        color: #ccc;
+
+        font-size: 0.84rem;
+
+        cursor: pointer;
+
+        &::file-selector-button {
+            background:
+                rgba(255, 255, 255, 0.1);
+
+            border: none;
+
+            border-radius: 6px;
+
+            color: #fff;
+
+            padding: 6px 12px;
+
+            margin-right: 12px;
+
+            cursor: pointer;
+
+            font-size: 0.78rem;
+
+            &:hover {
+                background:
+                    rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
+}
+
+// ======================================
+// SELECT
+// ======================================
+
+.add-song-select-wrap {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    select {
+        width: 100%;
+
+        appearance: none;
+
+        background:
+            rgba(255, 255, 255, 0.05);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.1);
+
+        border-radius: 10px;
+
+        padding:
+            10px
+            38px
+            10px
+            14px;
+
+        color: #ffffff;
+
+        font-size: 0.88rem;
+
+        outline: none;
+
+        cursor: pointer;
+
+        option {
+            background: #1e1422;
+
+            color: #ffffff;
+        }
+
+        &:focus {
+            border-color:
+                var(
+                    --accent-hover,
+                    #ff8555
+                );
+        }
+    }
+
+    .add-song-select-emoji {
+        position: absolute;
+
+        right: 14px;
+
+        pointer-events: none;
+
+        font-size: 1rem;
+    }
+}
+
+// ======================================
+// TABS
+// ======================================
+
+.add-song-tabs {
+    display: flex;
+
+    background:
+        rgba(255, 255, 255, 0.04);
+
+    border-radius: 10px;
+
+    padding: 3px;
+
+    gap: 2px;
+}
+
+.add-song-tab {
+    flex: 1;
+
+    background: none;
+
+    border: none;
+
+    padding: 7px;
+
+    font-size: 0.78rem;
+
+    font-weight: 600;
+
+    color: #888888;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: all 0.15s ease;
+
+    &:hover {
+        color: #ffffff;
+    }
+
+    &.is-active {
+        background:
+            rgba(255, 255, 255, 0.12);
+
+        color: #ffffff;
+    }
+}
+
+// ======================================
+// ACTIONS
+// ======================================
+
+.add-song-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 8px;
+}
+
+// ======================================
+// BUTTON
+// ======================================
+
+.add-song-btn {
+    padding: 10px 20px;
+
+    border-radius: 10px;
+
+    font-size: 0.88rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    border: none;
+
+    transition: all 0.15s ease;
+
+    &--cancel {
+        background:
+            rgba(255, 255, 255, 0.06);
+
+        color: #cccccc;
+
+        &:hover {
+            background:
+                rgba(255, 255, 255, 0.1);
+
+            color: #ffffff;
+        }
+    }
+
+    &--submit {
+        background:
+            var(
+                --accent,
+                #dd4200
+            );
+
+        color: #ffffff;
+
+        box-shadow:
+            0 4px 14px
+            rgba(221, 66, 0, 0.35);
+
+        &:hover {
+            background:
+                var(
+                    --accent-hover,
+                    #ff8555
+                );
+
+            transform: translateY(-1px);
+        }
+
+        &:disabled {
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+    }
+}
+
+// ======================================
+// ANIMATIONS
+// ======================================
+
+@keyframes add-song-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes add-song-slide-up {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(16px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}

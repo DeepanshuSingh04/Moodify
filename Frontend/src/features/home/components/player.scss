@@ -1,0 +1,376 @@
+.player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0; // Full-width across entire bottom
+    width: 100%;
+    height: 90px;
+    z-index: 100;
+    background: rgba(18, 10, 20, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    gap: 24px;
+    color: #fff;
+    transition: height 0.2s ease;
+
+    // Info section (left)
+    &__info {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex: 0 1 340px;
+        min-width: 0;
+    }
+
+    &__poster-wrap {
+        position: relative;
+        flex: 0 0 auto;
+        width: 52px;
+        height: 52px;
+    }
+
+    &__poster {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease;
+
+        &.is-spinning {
+            animation: player-spin 12s linear infinite;
+        }
+    }
+
+    &__mood-badge {
+        position: absolute;
+        bottom: -4px;
+        right: -4px;
+        background: rgba(0, 0, 0, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+    }
+
+    &__meta {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+        flex: 1;
+    }
+
+    &__title {
+        margin: 0;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 250px;
+    }
+
+    &__mood {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        color: var(--mood-color, #dd4200);
+        text-transform: capitalize;
+        font-weight: 500;
+    }
+
+    &__mood-emoji {
+        font-size: 0.85rem;
+    }
+
+    // Center controls & timeline
+    &__center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        flex: 1;
+        max-width: 540px;
+    }
+
+    &__controls {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    &__btn {
+        background: none;
+        border: none;
+        color: #b3b3b3;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.15s ease, transform 0.15s ease;
+
+        &:hover {
+            color: #ffffff;
+            transform: scale(1.06);
+        }
+
+        &--play {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+
+    border-radius: 50%;
+    border: none;
+
+    background: var(--mood-color, #dd4200);
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    cursor: pointer;
+
+    box-shadow: 0 4px 14px color-mix(
+        in srgb,
+        var(--mood-color, #dd4200) 40%,
+        transparent
+    );
+
+    &:hover {
+        transform: scale(1.08);
+        background: color-mix(
+            in srgb,
+            var(--mood-color, #dd4200) 85%,
+            #ffffff
+        );
+    }
+
+    svg {
+        display: block;
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+        color: #ffffff;
+        flex-shrink: 0;
+    }
+}
+
+        &--skip {
+            font-size: 0.72rem;
+            font-weight: 600;
+            gap: 2px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+        }
+    }
+
+    &__progress-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    &__time {
+        font-size: 0.72rem;
+        color: #888888;
+        font-variant-numeric: tabular-nums;
+        min-width: 32px;
+        text-align: center;
+    }
+
+    &__progress {
+        position: relative;
+        flex: 1;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 3px;
+        cursor: pointer;
+
+        &:hover .player__progress-fill {
+            background: var(--mood-color, #dd4200);
+        }
+
+        &:hover .player__progress-thumb {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+    }
+
+    &__progress-fill {
+        height: 100%;
+        background: #ffffff;
+        border-radius: 3px;
+        transition: background 0.15s ease;
+    }
+
+    &__progress-thumb {
+        position: absolute;
+        top: 50%;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    // Right side: speed + volume
+    &__side {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+        flex: 0 0 200px;
+    }
+
+    &__speed-wrap {
+        position: relative;
+    }
+
+    &__btn--speed {
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 4px 8px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.08);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+    }
+
+    &__speed-menu {
+        position: absolute;
+        bottom: 100%;
+        right: 0;
+        margin-bottom: 8px;
+        background: #1e1422;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        padding: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        z-index: 120;
+    }
+
+    &__speed-option {
+        background: none;
+        border: none;
+        color: #b3b3b3;
+        padding: 6px 14px;
+        font-size: 0.78rem;
+        font-weight: 500;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+        transition: background 0.12s ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        &.active {
+            color: var(--mood-color, #dd4200);
+            font-weight: 700;
+        }
+    }
+
+    &__volume {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__volume-slider {
+        width: 80px;
+        height: 4px;
+        accent-color: var(--mood-color, #dd4200);
+        cursor: pointer;
+    }
+}
+
+@keyframes player-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// Media Queries for Responsiveness
+@media (max-width: 900px) {
+    .player {
+        right: 0; // Full width on mobile/tablet when sidebar stacks
+        height: 84px;
+        padding: 0 16px;
+
+        &__info {
+            flex: 0 1 180px;
+        }
+
+        &__side {
+            flex: 0 0 auto;
+        }
+
+        &__volume-slider {
+            width: 50px;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .player {
+        height: auto;
+        min-height: 76px;
+        padding: 10px 12px;
+        flex-wrap: wrap;
+
+        &__info {
+            flex: 1 1 100%;
+        }
+
+        &__center {
+            flex: 1 1 100%;
+            max-width: 100%;
+            order: 3;
+        }
+
+        &__side {
+            order: 2;
+        }
+
+        &__volume-slider {
+            display: none; // Hide slider on very small screens to keep UI clean
+        }
+    }
+}

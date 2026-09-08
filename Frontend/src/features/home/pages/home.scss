@@ -1,0 +1,65 @@
+.home-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-right: 320px; // Reserve right sidebar width on desktop
+    padding-bottom: 100px; // Reserve bottom player height
+    transition: padding-right 0.2s ease;
+}
+
+.home-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 32px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.home-header {
+    text-align: center;
+    margin-bottom: 24px;
+
+    .home-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #ffffff 0%, var(--accent-hover, #ff8555) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0 0 6px;
+        letter-spacing: -0.5px;
+    }
+
+    .home-subtitle {
+        font-size: 0.95rem;
+        color: var(--text-secondary, #b09aa5);
+        margin: 0;
+    }
+}
+
+.home-expression-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+// Media Queries for Mobile / Tablet
+@media (max-width: 900px) {
+    .home-layout {
+        padding-right: 0; // Stack sidebar vertically on smaller screens
+        padding-bottom: 100px;
+    }
+
+    .home-main {
+        padding: 20px 16px;
+    }
+}
