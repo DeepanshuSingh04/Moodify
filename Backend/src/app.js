@@ -1,41 +1,38 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
-
-// CORS Configuration (Local + Production)
-const allowedOrigins = [
-  "http://localhost:5173",
-  process.env.FRONTEND_URL // Render environment variables me apne deployed frontend ka URL daal dein
-].filter(Boolean);
-
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: true,
     credentials: true,
   })
 );
 
-// Health Check / Root Route (Fixes 'Cannot GET /')
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Moodify Backend API is running successfully!",
-  });
-});
-
 /**
- * Routes
+ * API Routes
  */
 const authRoutes = require("./routes/auth.routes");
 const songRoutes = require("./routes/song.routes");
 
 app.use("/api/auth", authRoutes);
-app.use("/api/songs", songRoutes); // Main songs route
+app.use("/api/songs", songRoutes);
+
+/**
+ * Static Frontend Files Serve karna
+ */
+// 1. Static folder link karein (agar dist folder backend ke root par hai)
+app.use(express.static(path.join(__dirname, "../dist"))); // ya "public" jo bhi aapka folder ho
+
+// 2. Kisi bhi baaki route par Frontend ki index.html return karein (React Router support ke liye)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist", "index.html"));
+});
 
 module.exports = app;
