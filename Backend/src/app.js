@@ -28,11 +28,14 @@ app.use("/api/songs", songRoutes);
 /**
  * Static Frontend Files Serve
  */
-app.use(express.static(path.join(__dirname, "public")));
+/**
+ * Static Frontend Files Serve
+ */
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.get("/{*splat}", (req, res) => {
   res.sendFile(
-    path.join(__dirname, "public", "index.html")
+    path.join(__dirname, "../public", "index.html")
   );
 });
 
