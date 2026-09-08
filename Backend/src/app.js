@@ -25,13 +25,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/songs", songRoutes);
 
 /**
- * Static Frontend Files Serve karna
+ * Static Frontend Files Serve
  */
-// 1. Static folder link karein (agar dist folder backend ke root par hai)
-app.use(express.static(path.join(__dirname, "../dist"))); // ya "public" jo bhi aapka folder ho
+// Static folder path (dist folder ka path check kar lein)
+app.use(express.static(path.join(__dirname, "../dist")));
 
-// 2. Kisi bhi baaki route par Frontend ki index.html return karein (React Router support ke liye)
-app.get("*", (req, res) => {
+// Express 5 wildcard syntax: '/*' ya '/(.*)'
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "../dist", "index.html"));
 });
 
